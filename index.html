@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA 5 Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; margin: 0; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const mapWidth = 5000;
+  const mapHeight = 5000;
+
+  const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2,
+    maxZoom: 2,
+    zoomSnap: 0.25,
+  });
+
+  const bounds = [[0,0], [mapHeight, mapWidth]];
+  L.imageOverlay('https://static.gta-5-map.com/images/fullmap/map.jpg', bounds).addTo(map);
+  map.fitBounds(bounds);
+
+  const gunIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/2910/2910761.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+
+  L.marker([2500, 2000], { icon: gunIcon })
+    .addTo(map)
+    .bindPopup("Ammu-Nation");
+</script>
+
+</body>
+</html>
